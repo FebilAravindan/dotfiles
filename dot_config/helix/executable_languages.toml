@@ -1,0 +1,46 @@
+[[language]]
+name = "typescript"
+language-servers = ["deno-lsp", "tailwindcss-ls"]
+
+[[language]]
+name = "tsx"
+language-servers = ["typescript-language-server", "tailwindcss-ls"]
+block-comment-tokens = { start = "{/*", end = "*/}" }
+
+[[language]]
+name = "jsx"
+language-servers = ["typescript-language-server", "tailwindcss-ls"]
+block-comment-tokens = { start = "{/*", end = "*/}" }
+
+# Define the Tailwind CSS language server
+[language-server.tailwindcss-ls]
+command = "tailwindcss-language-server"
+args = ["--stdio"]
+
+# Add Tailwind to HTML files
+[[language]]
+name = "html"
+language-servers = ["tailwindcss-ls", "vscode-html-language-server"]
+
+# Add Tailwind to CSS files
+[[language]]
+name = "css"
+language-servers = ["tailwindcss-ls", "vscode-css-language-server"]
+
+# Add Tailwind to JavaScript/JSX files
+[[language]]
+name = "javascript"
+language-servers = ["tailwindcss-ls", "typescript-language-server"]
+
+[[language]]
+name = "jsx"
+language-servers = ["tailwindcss-ls", "typescript-language-server"]
+
+# Add Tailwind to TypeScript/TSX files
+[[language]]
+name = "typescript"
+language-servers = ["tailwindcss-ls", "typescript-language-server"]
+
+[[language]]
+name = "tsx"
+language-servers = ["tailwindcss-ls", "typescript-language-server"]
