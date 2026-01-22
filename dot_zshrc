@@ -102,3 +102,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+export ASDF_DATA_DIR="$HOME/.config/asdf"
+. $(brew --prefix asdf)/libexec/asdf.sh
+export PATH="$HOME/.local/bin:$PATH"
