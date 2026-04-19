@@ -36,3 +36,10 @@ E = [
   ":open %sh{cat /tmp/unique-file-h21a434}",
   ":redraw"
 ]
+[keys.normal.space.","]
+t = ":sh helix-wezterm.sh test %{buffer_name}"
+r = ":sh helix-wezterm.sh run %{buffer_name}"
+g = ":sh helix-wezterm.sh lazygit"
+e = ":sh helix-wezterm.sh explorer"
+ 
+m = ":sh gh markdown-preview %{buffer_name}"

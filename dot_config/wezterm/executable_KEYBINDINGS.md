@@ -172,6 +172,32 @@ Press `CTRL+A`, release, then press the action key within 1 second.
 
 ---
 
+## Session Management (resurrect.wezterm)
+
+Sessions auto-save every 15 minutes. Saved state lives in `~/.local/share/wezterm/resurrect/`.
+
+| Keys | Action |
+|------|--------|
+| `CTRL+A` then `S` | Save current workspace (Shift+s) |
+| `CTRL+A` then `R` | Fuzzy-load saved session (Shift+r) |
+
+### Workflow: Restore after relaunch
+```
+1. Open WezTerm
+2. CTRL+A, R        → Opens fuzzy finder with saved sessions
+3. Select workspace  → Layout, tabs, panes, cwd restored
+```
+
+### Workflow: Manual save before closing
+```
+1. CTRL+A, S        → Saves current workspace state
+2. Close WezTerm
+3. Reopen later
+4. CTRL+A, R        → Restore from saved state
+```
+
+---
+
 ## Quick Workflows
 
 ### Split into 3-pane layout (editor + server + shell)

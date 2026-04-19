@@ -11,12 +11,29 @@ local config = wezterm.config_builder()
 -- LOAD MODAL PLUGIN
 -- ============================================
 local modal = wezterm.plugin.require("https://github.com/MLFlexer/modal.wezterm")
+local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 
 -- Apply modal plugin and set default keys
 modal.apply_to_config(config)
 modal.set_default_keys(config)
 -- This enables: ALT+u (UI mode), ALT+c (Copy mode), ALT+n (Scroll mode)
 -- ESC or CTRL+c to exit any mode
+
+-- ============================================
+-- RESURRECT PLUGIN (session persistence)
+-- ============================================
+-- Auto-save workspace state every 15 minutes
+resurrect.state_manager.periodic_save({
+  interval_seconds = 15 * 60,
+  save_workspaces = true,
+  save_windows = true,
+  save_tabs = true,
+})
+
+-- Event listeners for save/load notifications
+wezterm.on("resurrect.error", function(error)
+  wezterm.log_error("Resurrect error: " .. error)
+end)
 
 -- ============================================
 -- APPEARANCE
@@ -108,6 +125,36 @@ config.keys = {
   -- MISC
   { key = "r", mods = "LEADER", action = act.ReloadConfiguration },
   { key = ":", mods = "LEADER|SHIFT", action = act.ShowLauncher },
+
+  -- SESSION MANAGEMENT (resurrect.wezterm)
+  -- Save current workspace state
+  { key = "S", mods = "LEADER|SHIFT", action = wezterm.action_callback(function(win, pane)
+    resurrect.state_manager.save_state(resurrect.workspace_state.get_workspace_state())
+    resurrect.window_state.save_window_action()
+  end) },
+  -- Fuzzy-load a saved workspace/window/tab
+  { key = "R", mods = "LEADER|SHIFT", action = wezterm.action_callback(function(win, pane)
+    resurrect.fuzzy_loader.fuzzy_load(win, pane, function(id, label)
+      local type = string.match(id, "^([^/]+)")
+      id = string.match(id, "([^/]+)$")
+      id = string.match(id, "(.+)%..+$")
+      local opts = {
+        relative = true,
+        restore_text = true,
+        on_pane_restore = resurrect.tab_state.default_on_pane_restore,
+      }
+      if type == "workspace" then
+        local state = resurrect.state_manager.load_state(id, "workspace")
+        resurrect.workspace_state.restore_workspace(state, opts)
+      elseif type == "window" then
+        local state = resurrect.state_manager.load_state(id, "window")
+        resurrect.window_state.restore_window(pane:window(), state, opts)
+      elseif type == "tab" then
+        local state = resurrect.state_manager.load_state(id, "tab")
+        resurrect.tab_state.restore_tab(pane:tab(), state, opts)
+      end
+    end)
+  end) },
 }
 
 -- ============================================

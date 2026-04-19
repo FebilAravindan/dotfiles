@@ -1,5 +1,3 @@
-tap "wox-launcher/wox"
-
 # Core tools
 brew "asdf"
 brew "chezmoi"
@@ -34,3 +32,4 @@ cask "claude-code"
 cask "font-symbols-only-nerd-font"
 cask "wezterm"
 cask "karabiner-elements"
+# Note: Wox must be installed manually from https://github.com/Wox-launcher/Wox/releases
