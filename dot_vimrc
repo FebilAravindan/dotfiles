@@ -1,0 +1,18 @@
+" Encoding - required for Malayalam and other multibyte scripts
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8,ucs-bom,latin1
+scriptencoding utf-8
+
+" Tell vim the terminal supports unicode
+set termencoding=utf-8
+
+" Syntax and filetype
+syntax on
+filetype plugin indent on
+
+" Show line numbers
+set number
+
+" Better display of special characters
+set display+=lastline

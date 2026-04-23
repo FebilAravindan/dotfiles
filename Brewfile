@@ -11,7 +11,7 @@ brew "lazygit"
 brew "ripgrep"
 brew "fd"
 brew "fzf"
-brew "eza"
+# brew "eza"
 brew "bat"
 brew "ffmpeg"
 brew "sevenzip"
@@ -25,11 +25,12 @@ brew "autoconf"
 brew "openssl@3"
 brew "wxwidgets"
 brew "libxslt"
-brew "fop"
+# brew "fop"
 
 # Apps
 cask "claude-code"
 cask "font-symbols-only-nerd-font"
+cask "font-noto-sans-malayalam"  # Malayalam script rendering in WezTerm
 cask "wezterm"
 cask "karabiner-elements"
 # Note: Wox must be installed manually from https://github.com/Wox-launcher/Wox/releases
