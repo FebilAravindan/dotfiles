@@ -30,7 +30,7 @@ brew "libxslt"
 # Apps
 cask "claude-code"
 cask "font-symbols-only-nerd-font"
-cask "font-noto-sans-malayalam"  # Malayalam script rendering in WezTerm
 cask "wezterm"
 cask "karabiner-elements"
 # Note: Wox must be installed manually from https://github.com/Wox-launcher/Wox/releases
+brew "tmux"

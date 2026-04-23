@@ -106,3 +106,4 @@ export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 export ASDF_DATA_DIR="$HOME/.config/asdf"
 . $(brew --prefix asdf)/libexec/asdf.sh
 export PATH="$HOME/.local/bin:$PATH"
+setopt COMBINING_CHARS
