@@ -40,18 +40,17 @@ end)
 -- ============================================
 config.color_scheme = "Tokyo Night"
 config.font = wezterm.font_with_fallback({
-  { family = "JetBrains Mono", weight = "Medium" },
-  {
-    family = "Noto Sans Malayalam",  -- Malayalam script support
-    harfbuzz_features = { "calt=1", "clig=1", "liga=1" },
-  },
-  "Noto Color Emoji",      -- Emoji fallback
+  'JetBrains Mono',
+  'Gayathri',
 })
 config.font_size = 14.0
 config.line_height = 1.1
 
--- Allow Malayalam combined glyphs (wider than monospace cell) to overflow
+-- Malayalam / complex script rendering fixes
 config.allow_square_glyphs_to_overflow_width = "WhenFollowedBySpace"
+config.unicode_version = 14
+config.harfbuzz_features = { 'kern', 'liga', 'clig', 'calt' }
+config.freetype_load_flags = 'DEFAULT'
 
 -- Window settings
 config.window_padding = { left = 10, right = 10, top = 10, bottom = 10 }

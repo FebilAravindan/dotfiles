@@ -33,4 +33,3 @@ cask "font-symbols-only-nerd-font"
 cask "wezterm"
 cask "karabiner-elements"
 # Note: Wox must be installed manually from https://github.com/Wox-launcher/Wox/releases
-brew "tmux"
