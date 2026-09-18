@@ -1,0 +1,97 @@
+# Auto-launch into a tmux session so kitty-style splits always work,
+# without you having to type `tmux` first.
+[terminal.shell]
+program = "/usr/bin/tmux"
+args = ["new-session", "-A", "-s", "main"]
+
+# Kitty-style split keybindings.
+# Alacritty distinguishes Ctrl+Shift+<key> at the key-event level (before any
+# escape-sequence encoding), so these fire correctly regardless of whether
+# the shell can tell Ctrl+H apart from Ctrl+Shift+H on the wire. Each binding
+# sends tmux's prefix (Ctrl-B = \u0002) followed by the matching tmux command
+# byte, so tmux does the actual split/navigate/close.
+
+# Ctrl+Shift+Enter -> split horizontally (new pane below), like kitty's hsplit
+[[keyboard.bindings]]
+key = "Enter"
+mods = "Control|Shift"
+chars = "\u0002\""
+
+# Ctrl+Shift+S -> split vertically (new pane to the side), like kitty's vsplit
+[[keyboard.bindings]]
+key = "S"
+mods = "Control|Shift"
+chars = "\u0002%"
+
+# Ctrl+Shift+H/J/K/L -> move focus to the pane in that direction
+[[keyboard.bindings]]
+key = "H"
+mods = "Control|Shift"
+chars = "\u0002h"
+
+[[keyboard.bindings]]
+key = "J"
+mods = "Control|Shift"
+chars = "\u0002j"
+
+[[keyboard.bindings]]
+key = "K"
+mods = "Control|Shift"
+chars = "\u0002k"
+
+[[keyboard.bindings]]
+key = "L"
+mods = "Control|Shift"
+chars = "\u0002l"
+
+# Ctrl+Shift+W -> close the focused pane (tmux will ask you to confirm)
+[[keyboard.bindings]]
+key = "W"
+mods = "Control|Shift"
+chars = "\u0002x"
+
+# Ctrl+Shift+T -> new tab, matching kitty's new_tab. tmux calls a tab a
+# "window", so this sends the prefix plus `c` (new-window).
+[[keyboard.bindings]]
+key = "T"
+mods = "Control|Shift"
+chars = "\u0002c"
+
+
+# Open maximized. "Maximized" fills the work area and keeps the window
+# decorations and panel; use "Fullscreen" instead for a true no-chrome window.
+[window]
+# Open already near-full-size. startup_mode is only a *request* sent to the
+# window manager after the window is mapped, so on a busy system (login, snap
+# cold start) the maximize can land late and you see a small window first.
+# Seeding dimensions means the very first frame already fills the 2560x1440
+# display; Maximized then just snaps it flush.
+dimensions = { columns = 278, lines = 76 }
+startup_mode = "Maximized"
+
+# Monokai Pro (Ristretto) theme. Colours use Alacritty's 0x hex form as given.
+# Only primary/normal/bright are set, so cursor, selection, search and hint
+# colours fall back to Alacritty's defaults.
+[colors.primary]
+background = "0x2D2A2E"
+foreground = "0xfff1f3"
+
+[colors.normal]
+black = "0x2c2525"
+red = "0xfd6883"
+green = "0xadda78"
+yellow = "0xf9cc6c"
+blue = "0xf38d70"
+magenta = "0xa8a9eb"
+cyan = "0x85dacc"
+white = "0xfff1f3"
+
+[colors.bright]
+black = "0x72696a"
+red = "0xfd6883"
+green = "0xadda78"
+yellow = "0xf9cc6c"
+blue = "0xf38d70"
+magenta = "0xa8a9eb"
+cyan = "0x85dacc"
+white = "0xfff1f3"

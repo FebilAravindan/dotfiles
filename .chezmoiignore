@@ -1,0 +1,21 @@
+# Paths here are TARGET paths (what lands in $HOME), not source names.
+
+{{- if eq .chezmoi.os "darwin" }}
+# Linux-only: GNOME autostart, the snap Alacritty setup and its session script.
+.config/autostart
+.config/alacritty
+.local/bin/helix-docs
+{{- end }}
+
+{{- if ne .chezmoi.os "darwin" }}
+# macOS-only: Homebrew, Karabiner (Mac keyboard driver) and WezTerm.
+Brewfile
+.config/karabiner
+.config/wezterm
+run_once_01-install-homebrew.sh
+run_once_02-install-brew-packages.sh
+run_once_03-install-ohmyzsh.sh
+{{- end }}
+
+# Never track macOS Finder metadata.
+.DS_Store

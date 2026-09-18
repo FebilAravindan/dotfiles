@@ -1,0 +1,9 @@
+#!/bin/sh
+# left pane: claude with the helix docs. right pane: plain shell in devcraft.
+S=helixdocs
+if ! tmux has-session -t "$S" 2>/dev/null; then
+  tmux new-session  -d -s "$S" -c "$HOME/devcraft/helix/book/src" 'claude'
+  tmux split-window -h -t "$S" -c "$HOME/devcraft"
+  tmux select-pane -t "$S".0
+fi
+exec tmux attach -t "$S"
